@@ -27,7 +27,7 @@ const Navbar = () => {
               font.className
             )}
           >
-            audientia.ai
+            companion.ai
           </h1>
         </Link>
       </div>
