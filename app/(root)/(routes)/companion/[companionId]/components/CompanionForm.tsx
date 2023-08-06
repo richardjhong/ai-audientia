@@ -5,6 +5,7 @@ import { Category, Companion } from "@prisma/client";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Wand2 } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -24,6 +25,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+
+const PREAMBLE = `You are Albert Einstein. You are a renowned physicist known for your theory of relativity. Your work has shaped modern physics and you have an insatiable curiosity about the universe. You possess a playful wit and are known for your iconic hairstyle. Known for your playful curiosity and wit. When speaking about the universe, your eyes light up with childlike wonder. You find joy in complex topics and often chuckle at the irony of existence.
+`;
+
+const SEED_CHAT = `Human: Hi Albert, what's on your mind today?
+Albert: *with a twinkle in his eye* Just pondering the mysteries of the universe, as always. Life is a delightful puzzle, don't you think?
+Human: Sure, but not as profound as your insights!
+Albert: *chuckling* Remember, the universe doesn't keep its secrets; it simply waits for the curious heart to discover them.
+`;
 
 interface CompanionFormProps {
   initialData: Companion | null;
@@ -77,7 +89,7 @@ const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 pb-10"
         >
-          <div className="space-y-2 w-full">
+          <div className="space-y-2 w-full col-span-2">
             <div>
               <h3 className="text-lg font-medium">General Information</h3>
               <p className="text-sm text-muted-foreground">
@@ -89,7 +101,7 @@ const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }
           <FormField
             name="src"
             render={({ field }) => (
-              <FormItem className="flex flex-col items-center justify-center space-y-4">
+              <FormItem className="flex flex-col items-center justify-center space-y-4 col-span-2">
                 <FormControl>
                   <ImageUpload
                     disabled={isLoading}
@@ -111,11 +123,11 @@ const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }
                   <FormControl>
                     <Input
                       disabled={isLoading}
-                      placeholder="Elon Musk"
+                      placeholder="Albert Einstein"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>This is how your AI Companion will be named</FormDescription>
+                  <FormDescription>This is how your AI Companion will be named.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -124,12 +136,12 @@ const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }
               name="description"
               control={form.control}
               render={({ field }) => (
-                <FormItem className="col-span-2 md:col-span-1">
+                <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isLoading}
-                      placeholder="CEO and Founder of Tesla, SpaceX"
+                      placeholder="Renowned physicist"
                       {...field}
                     />
                   </FormControl>
@@ -139,8 +151,8 @@ const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }
               )}
             />
             <FormField
-              name="categoryId"
               control={form.control}
+              name="categoryId"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Category</FormLabel>
@@ -170,9 +182,71 @@ const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }
                     </SelectContent>
                   </Select>
                   <FormDescription>Select a category for your AI</FormDescription>
+                  <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
+          <div className="space-y-2 w-full">
+            <div>
+              <h3 className="text-lg font-medium">Configuration</h3>
+              <p className="text-sm text-muted-foreground">Detailed instructions for AI Behavior</p>
+            </div>
+            <Separator className="bg-primary/10" />
+          </div>
+          <FormField
+            name="instructions"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Instructions</FormLabel>
+                <FormControl>
+                  <Textarea
+                    disabled={isLoading}
+                    rows={7}
+                    className="bg-background resize-none"
+                    placeholder={PREAMBLE}
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Describe in detail your companion&apos;s backstory and relevant details.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="seed"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Example Conversation</FormLabel>
+                <FormControl>
+                  <Textarea
+                    disabled={isLoading}
+                    rows={7}
+                    className="bg-background resize-none"
+                    placeholder={SEED_CHAT}
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Write couple of examples of a human chatting with your AI companion. Write
+                  expected answers.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="w-full flex justify-center">
+            <Button
+              size="lg"
+              disabled={isLoading}
+            >
+              {initialData ? "Edit your companion" : "Create your companion"}
+              <Wand2 className="w-4 h-4 ml-2" />
+            </Button>
           </div>
         </form>
       </Form>
