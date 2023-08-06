@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
+import ImageUpload from "@/components/ImageUpload";
 
 interface CompanionFormProps {
   initialData: Companion | null;
@@ -60,7 +61,7 @@ const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 pb-10"
         >
-          <div className="space-y-2 w-full-col-span-2">
+          <div className="space-y-2 w-full">
             <div>
               <h3 className="text-lg font-medium">General Information</h3>
               <p className="text-sm text-muted-foreground">
@@ -72,8 +73,14 @@ const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }
           <FormField
             name="src"
             render={({ field }) => (
-              <FormItem className="flex flex-col items-center justify-center space-y-4 col-span-2">
-                <FormControl>Image Upload Component</FormControl>
+              <FormItem className="flex flex-col items-center justify-center space-y-4">
+                <FormControl>
+                  <ImageUpload
+                    disabled={isLoading}
+                    onChange={field.onChange}
+                    value={field.value}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
