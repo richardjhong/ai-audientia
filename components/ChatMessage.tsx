@@ -2,10 +2,13 @@
 
 import { useTheme } from "next-themes";
 import { BeatLoader } from "react-spinners";
+import { Copy } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 import BotAvatar from "@/components/BotAvatar";
+import UserAvatar from "@/components/UserAvatar";
+import { Button } from "@/components/ui/button";
 
 export interface ChatMessageProps {
   role: "system" | "user";
@@ -42,6 +45,17 @@ const ChatMessage = ({ role, content, isLoading, src }: ChatMessageProps) => {
           content
         )}
       </div>
+      {role === "user" && <UserAvatar />}
+      {role !== "user" && !isLoading && (
+        <Button
+          onClick={onCopy}
+          className="opacity-0 group-hover:opacity-100 transition"
+          size="icon"
+          variant="ghost"
+        >
+          <Copy className="w-4 h-4" />
+        </Button>
+      )}
     </div>
   );
 };

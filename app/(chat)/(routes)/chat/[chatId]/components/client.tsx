@@ -8,6 +8,7 @@ import { FormEvent, useState } from "react";
 import ChatHeader from "@/components/ChatHeader";
 import ChatForm from "@/components/ChatForm";
 import ChatMessages from "@/components/ChatMessages";
+import { ChatMessageProps } from "@/components/ChatMessage";
 
 interface ChatClientProps {
   companion: Companion & {
@@ -20,12 +21,12 @@ interface ChatClientProps {
 
 const ChatClient = ({ companion }: ChatClientProps) => {
   const router = useRouter();
-  const [messages, setMessages] = useState<any[]>(companion.messages);
+  const [messages, setMessages] = useState<ChatMessageProps[]>(companion.messages);
 
   const { input, isLoading, handleInputChange, handleSubmit, setInput } = useCompletion({
     api: `/api/chat/${companion.id}`,
     onFinish(_, completion) {
-      const systemMessage = {
+      const systemMessage: ChatMessageProps = {
         role: "system",
         content: completion,
       };
@@ -38,7 +39,7 @@ const ChatClient = ({ companion }: ChatClientProps) => {
   });
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    const userMessage = {
+    const userMessage: ChatMessageProps = {
       role: "user",
       content: input,
     };
