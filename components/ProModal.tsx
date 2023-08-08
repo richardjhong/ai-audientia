@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   Dialog,
@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 
 const ProModal = () => {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const proModal = useProModal();
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
@@ -35,6 +36,12 @@ const ProModal = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return <></>;
 
   return (
     <Dialog
