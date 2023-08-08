@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
+import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
-import { cn } from "@/lib/utils";
+import ProModal from "@/components/ProModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             defaultTheme="system"
             enableSystem
           >
+            <ProModal />
             {children}
             <Toaster />
           </ThemeProvider>
