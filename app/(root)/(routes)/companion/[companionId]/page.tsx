@@ -11,7 +11,6 @@ interface CompanionIdPageProps {
 
 const CompanionIdPage = async ({ params }: CompanionIdPageProps) => {
   const { userId } = auth();
-  // TODO: Check subscription
 
   if (!userId) return redirectToSignIn();
 
