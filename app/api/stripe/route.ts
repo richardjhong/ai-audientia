@@ -12,7 +12,9 @@ export const GET = async () => {
     const { userId } = auth();
     const user = await currentUser();
 
-    if (!userId || !user) return new NextResponse("Unauthorized", { status: 401 });
+    if (!userId || !user) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
 
     const userSubscription = await prismadb.userSubscription.findUnique({
       where: {
@@ -20,7 +22,6 @@ export const GET = async () => {
       },
     });
 
-    // if user is already subscribed then show cancellation / renewal date options
     if (userSubscription?.stripeCustomerId) {
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: userSubscription.stripeCustomerId,
@@ -30,7 +31,6 @@ export const GET = async () => {
       return new NextResponse(JSON.stringify({ url: stripeSession.url }));
     }
 
-    // user is subscribing for the first time
     const stripeSession = await stripe.checkout.sessions.create({
       success_url: settingsUrl,
       cancel_url: settingsUrl,
@@ -60,8 +60,8 @@ export const GET = async () => {
     });
 
     return new NextResponse(JSON.stringify({ url: stripeSession.url }));
-  } catch (err) {
-    console.error("[STRIPE_GET]", err);
+  } catch (error) {
+    console.log("[STRIPE_GET]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 };
