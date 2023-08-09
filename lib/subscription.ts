@@ -14,10 +14,10 @@ export const checkSubscription = async () => {
       userId,
     },
     select: {
-      stripeCurrentPeriodEnd: true,
       stripeCustomerId: true,
-      stripePriceId: true,
       stripeSubscriptionId: true,
+      stripePriceId: true,
+      stripeCurrentPeriodEnd: true,
     },
   });
 
