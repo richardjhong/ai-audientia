@@ -42,6 +42,7 @@ const ChatClient = ({ companion }: ChatClientProps) => {
     const userMessage: ChatMessageProps = {
       role: "user",
       content: input,
+      createdAt: new Date(),
     };
 
     setMessages((current) => [...current, userMessage]);

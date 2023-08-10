@@ -44,6 +44,7 @@ const ChatMessages = ({ companion, isLoading, messages = [] }: ChatMessagesProps
           key={message.content}
           role={message.role}
           content={message.content}
+          createdAt={message.createdAt}
           src={companion.src}
         />
       ))}

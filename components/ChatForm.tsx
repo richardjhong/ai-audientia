@@ -3,9 +3,9 @@
 import { ChatRequestOptions } from "ai";
 import { ChangeEvent, FormEvent } from "react";
 
+import { SendHorizonal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SendHorizonal } from "lucide-react";
 
 interface ChatFormProps {
   isLoading: boolean;
