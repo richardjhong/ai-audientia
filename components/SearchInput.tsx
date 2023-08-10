@@ -3,8 +3,9 @@
 import qs from "query-string";
 import { ChangeEventHandler, useEffect, useState } from "react";
 import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
+
+import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/useDebounce";
 
 const SearchInput = () => {

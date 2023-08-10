@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+import { useProModal } from "@/hooks/useProModal";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useProModal } from "@/hooks/useProModal";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";

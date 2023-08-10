@@ -3,10 +3,12 @@
 import * as z from "zod";
 import axios from "axios";
 import { Category, Companion } from "@prisma/client";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Wand2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+import ImageUpload from "@/components/ImageUpload";
 import {
   Form,
   FormControl,
@@ -17,7 +19,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
-import ImageUpload from "@/components/ImageUpload";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -29,7 +30,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
 
 const PREAMBLE = `You are Albert Einstein. You are a renowned physicist known for your theory of relativity. Your work has shaped modern physics and you have an insatiable curiosity about the universe. You possess a playful wit and are known for your iconic hairstyle. Known for your playful curiosity and wit. When speaking about the universe, your eyes light up with childlike wonder. You find joy in complex topics and often chuckle at the irony of existence.
 `;
@@ -67,7 +67,7 @@ const formSchema = z.object({
   }),
 });
 
-const CompanionForm: React.FC<CompanionFormProps> = ({ initialData, categories }) => {
+const CompanionForm = ({ initialData, categories }: CompanionFormProps) => {
   const router = useRouter();
 
   const { toast } = useToast();
