@@ -1,16 +1,16 @@
 "use client";
 
 import qs from "query-string";
-import { cn } from "@/lib/utils";
 import { Category } from "@prisma/client";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+
+import { cn } from "@/lib/utils";
 
 interface CategoriesProps {
   data: Category[];
 }
 
-const Categories: React.FC<CategoriesProps> = ({ data }) => {
+const Categories = ({ data }: CategoriesProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
