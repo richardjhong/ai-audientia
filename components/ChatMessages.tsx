@@ -34,7 +34,9 @@ const ChatMessages = ({ companion, isLoading, messages = [] }: ChatMessagesProps
       <ChatMessage
         isLoading={fakeLoading}
         role="system"
-        content={`Hello, I am ${companion.name}, ${companion.description}`}
+        content={`${companion.name === "T-800" ? "" : "Hello, "}I am ${companion.name}, ${
+          companion.description
+        }`}
         src={companion.src}
       />
       {messages.map((message) => (
