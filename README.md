@@ -38,7 +38,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -178,14 +177,10 @@ The main features of this project are creation/editing of companions and being a
 
 * Any user can converse with existing companions, including companions made by others; however to create or edit a companion, the user must be on the pro subscription model. This is enabled through Stripe integration. 
 
-```text
-To complete the Stripe payment integration, use the credit card:
-
-4242 4242 4242 4242
-
-The other credit card information can be filled with mock values.
-
-```
+  - To complete the Stripe payment integration, use the credit card below (other fields can filled with any mock value):
+    ```text
+    4242 4242 4242 4242
+    ```
 
 * When creating a companion, there are fields that are required to be filled out:
   - Name
